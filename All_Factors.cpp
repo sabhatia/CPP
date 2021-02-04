@@ -5,7 +5,9 @@ using namespace std;
 int main()
 {
     uint user_val = 0;
-    cout << "Enter an positive integer: ";
+    char prompt[] = "Enter a positive integer: ";
+
+    cout << prompt;
     cin >> user_val;
 
     for (int factor = 1; factor <= user_val; factor++)
