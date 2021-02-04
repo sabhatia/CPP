@@ -28,3 +28,6 @@ Length_String.dSYM/Contents/Info.plist
 Operation_CharArray
 Operation_CharArray.dSYM/Contents/Info.plist
 Operation_CharArray.dSYM/Contents/Resources/DWARF/Operation_CharArray
+Operation_Strings.dSYM/Contents/Resources/DWARF/Operation_Strings
+Operation_Strings.dSYM/Contents/Info.plist
+Operation_Strings
