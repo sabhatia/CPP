@@ -12,6 +12,7 @@ class Complex
         Complex (float real=0, float imaginary = 0);
         Complex (Complex& c1);
         Complex operator+ (Complex rhs);
+        friend Complex operator- (Complex lhs, Complex rhs);
         friend ostream& operator<< (ostream& cout, Complex &c1);
 };
 
@@ -37,6 +38,16 @@ Complex Complex::operator+ (Complex rhs)
     return (c_add);
 }
 
+Complex operator- (Complex lhs, Complex rhs)
+{
+    Complex c_minus;
+
+    c_minus.real = lhs.real - rhs.real;
+    c_minus.imaginary = lhs.imaginary - rhs.imaginary;
+
+    return (c_minus);
+}
+
 ostream& operator<< (ostream &out_pipe, Complex& c1)
 {
     out_pipe << "(" << c1.real << ", " << c1.imaginary << "i) ";
@@ -59,4 +70,10 @@ int main()
 
     cout << "C1 + C2: " << c4 << endl;
     cout << "C2 + C3: " << c5 << endl;
+
+    c4 = c2 - c1;
+    c5 = c2 - c3;
+
+    cout << "C2 - C1: " << c4 << endl;
+    cout << "C2 - C3: " << c5 << endl;
 }
