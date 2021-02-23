@@ -99,10 +99,6 @@ int main()
     FullTimeEmployee f1(1, "Sandeep Bhatia", 45000.0);
     PartTimeEmployee p1(2, "Ansh Bhatia", 500.0);
 
-    //string emp_name = f1.get_employee_name();
-    //cout << "Emp1: \n\tID: " << f1.get_employee_id() << "\n\tName: " << emp_name;
-    //cout << "\n\tSalary: " << f1.get_employee_salary() << endl;
     cout << f1 << "\n" << endl; 
     cout << p1 << "\n" << endl;
-    //cout << "Emp2: " << p1.get_employee_id() << endl;
 }
