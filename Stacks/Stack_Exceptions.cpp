@@ -41,17 +41,18 @@ void Stack::push(int elem_val)
 {
     if (this->stack_depth == this->stack_size)
     {
-        return;
+        throw (Stack::STACK_ERROR_OVERFLOW);
     }
+    
     this->stack_array[this->stack_depth++] = elem_val;
 }
 
 int Stack::pop (void)
 {
-    if (this->stack_depth) 
+    if (!this->stack_depth)
     {
-        return (this->stack_array[--stack_depth]);
+        throw (Stack::STACK_ERROR_UNDERFLOW);
     }
-
-    return (0);
+    
+    return (this->stack_array[--stack_depth]);
 }
