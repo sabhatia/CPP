@@ -43,7 +43,11 @@ u_int Stack::get_size()
 
 ostream& operator<< (ostream& console, Stack& s)
 {
-    console << "Stack Contents: ";
+    console << "Stack" << endl;
+    console << "-----" << endl;
+    console << "\tDepth: " << s.stack_depth << endl;
+    console << "\tSize : " << s.stack_size << endl;
+    console << "\tContents: ";
     for (int indx = 0; indx < s.stack_depth; indx++)
     {
         console << s.stack_array[indx] << " ";
@@ -54,12 +58,21 @@ ostream& operator<< (ostream& console, Stack& s)
 
 void Stack::push(int elem_val)
 {
-    return;
+    if (this->stack_depth == this->stack_size)
+    {
+        return;
+    }
+    this->stack_array[this->stack_depth++] = elem_val;
 }
 
 int Stack::pop (void)
 {
-    return 0;
+    if (this->stack_depth) 
+    {
+        return (this->stack_array[--stack_depth]);
+    }
+
+    return (0);
 }
 
 int main()
@@ -68,8 +81,9 @@ int main()
     cout << "Stack Size: " << s1.get_size() << endl;
     
     cout << "S1(1): " << s1 << endl;
-    s1.push(10);
+    s1.push(10); s1.push(20);
     cout << "S1(2): " << s1 << endl;
     cout << "S1 Popped: " << s1.pop() << endl;
+    s1.pop(); s1.pop();
     cout << "S1(3): " << s1 << endl;
 }
