@@ -13,3 +13,4 @@ int main()
     s1.pop(); s1.pop();
     cout << "S1(3): " << s1 << endl;
 }
+ 
