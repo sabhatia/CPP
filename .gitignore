@@ -57,3 +57,9 @@ Stacks/.vscode/tasks.json
 Stacks/Stack_Test.dSYM/Contents/Info.plist
 Stacks/Stack_Test.dSYM/Contents/Resources/DWARF/Stack_Test
 Stacks/Stack_Test
+Int_to_string.dSYM/Contents/Info.plist
+Stacks/Stack.dSYM/Contents/Info.plist
+Stacks/Stack.dSYM/Contents/Resources/DWARF/Stack
+.gitignore
+Int_to_string
+Stacks/Stack

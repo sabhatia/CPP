@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <exception>
 using namespace std;
 
 // A class that allows for push and pop operations on integers
@@ -25,8 +25,20 @@ class Stack
 
         // Stack API
         Stack(u_int init_stack_size = STACK_SIZE_DEFAULT);
+        //TO-DO: ~Stack();
         u_int get_size ();
         void push (int elem_val);
         int pop (void);
         friend ostream& operator<< (ostream& console, Stack& s);
 };
+
+class Stack_Exception: public std::exception
+{
+    private:
+        u_int err_code;
+        string err_msg;
+    public:
+        Stack_Exception(u_int stack_err_code, string& stack_err_msg);
+        virtual const char* what();
+};
+
