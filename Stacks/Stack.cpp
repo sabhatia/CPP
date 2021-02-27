@@ -63,6 +63,7 @@ Stack_Exception::Stack_Exception(u_int error_code, string& error_msg)
     this->err_str = error_msg;
     this->err_code = error_code;
 
+    // Format the error code and error string into a human readable message
     this->err_stream << "ERROR(" << this->err_code << "): " << this->err_str;
     this->err_msg = this->err_stream.str();
 }
