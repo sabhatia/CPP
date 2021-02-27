@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string>
-#include <sstream>
 #include "Stack.h"
 
 using namespace std;
@@ -44,7 +41,7 @@ void Stack::push(int elem_val)
     if (this->stack_depth == this->stack_size)
     {
         string err_msg = "Stack Full"; 
-         throw (Stack_Exception(101, err_msg));
+         throw (Stack_Exception(Stack::STACK_ERROR_OVERFLOW, err_msg));
     }
     
     this->stack_array[this->stack_depth++] = elem_val;
@@ -55,7 +52,7 @@ int Stack::pop (void)
     if (!this->stack_depth)
     {
         string err_msg = "Stack Empty.";
-        throw (Stack_Exception(101, err_msg));
+        throw (Stack_Exception(Stack::STACK_ERROR_UNDERFLOW, err_msg));
     }
     
     return (this->stack_array[--stack_depth]);
@@ -63,11 +60,14 @@ int Stack::pop (void)
 
 Stack_Exception::Stack_Exception(u_int error_code, string& error_msg)
 {
-    this->err_msg = error_msg;
+    this->err_str = error_msg;
     this->err_code = error_code;
+
+    this->err_stream << "ERROR(" << this->err_code << "): " << this->err_str;
+    this->err_msg = this->err_stream.str();
 }
 
 const char* Stack_Exception::what()
 {
-    return (this->err_msg.c_str());
+    return (err_msg.c_str());
 }

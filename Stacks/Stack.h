@@ -1,5 +1,8 @@
 #include <iostream>
 #include <exception>
+#include <string>
+#include <sstream>
+
 using namespace std;
 
 // A class that allows for push and pop operations on integers
@@ -36,7 +39,9 @@ class Stack_Exception: public std::exception
 {
     private:
         u_int err_code;
-        string err_msg;
+        string err_str;
+        string err_msg; // Error Message = Error code + Error String
+        stringstream err_stream;
     public:
         Stack_Exception(u_int stack_err_code, string& stack_err_msg);
         virtual const char* what();
