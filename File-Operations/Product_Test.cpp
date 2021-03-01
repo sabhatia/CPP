@@ -3,7 +3,7 @@
 int main()
 {
     // TC(1): Test product allocation
-    cout << "TC1: Allocate and print a Product";
+    cout << "TC1: Allocate and print a Product" << endl;
     Product p1(1, "Destiny", 10);
     cout << p1 << endl;
 
@@ -14,7 +14,7 @@ int main()
     u_int  product_quantity;
     
     // Get how many products we need
-    cout << "TC2: Dynamically Allocate Products";
+    cout << "TC2: Dynamically Allocate Products" << endl;
     cout << "Enter total products: ";
     cin >> total_products;
 
@@ -24,14 +24,14 @@ int main()
     
     if (!products) 
     {
-        cout << "ERROR: No memory for product tracking. Exiting...";
+        cout << "ERROR: No memory for product tracking. Exiting..." << endl;
         return (1);
     }
     
     // Get product details
     for (int indx = 0; indx < total_products; indx++)
     {
-        cout << "Gathering detailed for Product #" << indx+1 << endl;
+        cout << "Gathering info for Product #" << indx+1 << endl;
         cout << "Product Name: "; cin >> product_name;
         cout << "Product ID: "; cin >> product_id;
         cout << "Product Quantity: "; cin >> product_quantity;
@@ -47,7 +47,7 @@ int main()
     cout << endl;
 
     // TC(3): Write to a file
-    cout << "TC3: Write products to a file";
+    cout << "TC3: Write products to a file" << endl;
 
     ofstream out_file;
     string products_filename;
@@ -66,7 +66,7 @@ int main()
     out_file.close();
 
     // TC(4): Read from a file
-    cout << "TC4: Read products from a file";
+    cout << "TC4: Read products from a file" << endl;
 
     ifstream in_file;
     in_file.open(products_filename);
