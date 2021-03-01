@@ -28,14 +28,18 @@ ostream& operator<< (ostream& console, Product& product_info)
     console << "\tID: " << product_info.id << endl;
     console << "\tQuantity: " << product_info.quantity << endl;
     return (console);
-}
+} 
 
 ofstream& operator<< (ofstream& out_file, Product &product_info)
 {
+    out_file << product_info.id << endl << product_info.name << endl << product_info.quantity << endl;
     return (out_file);
 }
 
 ifstream& operator>> (ifstream& in_file, Product &product_info)
 {
+    in_file >> product_info.id;
+    in_file >> product_info.name;
+    in_file >> product_info.quantity;
     return (in_file);
 }
