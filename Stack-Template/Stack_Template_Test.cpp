@@ -4,8 +4,8 @@ using namespace std;
 
 int main()
 {
-    Stack_Template s1<int>;
-    Stack_Template s2<float>;
+    Stack_Template<int> s1;
+    Stack_Template<float> s2;
 
     // TC(1): Basic Push
     s1.push(10); s1.push(20); s1.push(30);
