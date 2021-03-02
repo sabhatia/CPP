@@ -11,13 +11,29 @@ template <class T>
 class Stack_Template
 {
 private:
-    T s_arry[10];
+    T* s_arry;
     int s_ptr = 0;
 
 public:
+    Stack_Template(int size = 10)
+    { 
+        s_arry = new T[size];
+    }
 
-    void push(T elem);
-    T pop();
+    ~Stack_Template()
+    {
+        delete [] s_arry;
+    }
+
+    void push(T elem)
+    {
+        return;
+    }
+    T pop()
+    {
+        T elem;
+        return (elem);
+    }
     friend ostream &operator<<(ostream &console, Stack_Template<T> &st)
     {
 
