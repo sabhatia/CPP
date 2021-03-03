@@ -19,4 +19,7 @@ int main()
     s1.pop(); s2.pop();
     cout << s1; cout << s2;
 
+    // TC(3): Empty the stack
+    s1.pop(); s2.pop();
+    cout << s1; cout << s2;
 }

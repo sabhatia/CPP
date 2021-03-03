@@ -4,7 +4,6 @@
 #endif // STACKS_TEMPLATE_HPP
 
 #include <iostream>
-#include <string>
 
 using namespace std;
 template <class T>
@@ -13,10 +12,11 @@ class Stack_Template
 private:
     T* s_arry;
     int s_ptr = 0;
-
+    u_int size = 10;
 public:
     Stack_Template(int size = 10)
     { 
+        this->size = size;
         s_arry = new T[size];
     }
 
@@ -27,13 +27,24 @@ public:
 
     void push(T elem)
     {
-        return;
+        if (s_ptr >= size) 
+        {
+            return;
+        }
+        s_arry[s_ptr++] = elem;
     }
+
     T pop()
     {
-        T elem;
-        return (elem);
+        T error_elem;
+
+        if (s_ptr == 0)
+        {
+            return error_elem;
+        }
+        return (s_arry[s_ptr--]);
     }
+
     friend ostream &operator<<(ostream &console, Stack_Template<T> &st)
     {
 
