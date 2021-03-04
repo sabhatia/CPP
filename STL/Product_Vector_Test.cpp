@@ -120,8 +120,8 @@ int main()
     }
 
     // TC(8): Check if we got the correct entries
-    int indx = 0;
-    for (indx = 0, itr = v_read.begin(); itr != v_read.end(); itr++, indx++)
+    int indx;
+    for (indx = 1, itr = v_read.begin(); itr != v_read.end(); itr++, indx++)
     {
         cout << "Entry[" << indx << "]" << endl << *itr;
     }
