@@ -1,3 +1,8 @@
+#ifndef PRODUCT_CPP
+#define PRODUCT_CPP
+
+#endif
+
 #include <iostream>
 #include <fstream>
 #include <string>
