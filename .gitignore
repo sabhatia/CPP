@@ -81,3 +81,9 @@ Stack-Template/.vscode/settings.json
 Stack-Template/Stack_Template_Test
 Stack-Template/Stack_Template_Test.dSYM/Contents/Info.plist
 Stack-Template/Stack_Template_Test.dSYM/Contents/Resources/DWARF/Stack_Template_Test
+STL/prod_file
+STL/product_file
+STL/.vscode/tasks.json
+STL/Employee_Test.dSYM/Contents/Info.plist
+STL/Employee_Test.dSYM/Contents/Resources/DWARF/Employee_Test
+STL/Employee_Test
