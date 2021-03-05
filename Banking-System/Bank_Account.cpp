@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 class Bank_Account
 {
 private:
@@ -16,5 +18,15 @@ public:
         this->owner_id = owner_id;
         this->available_funds = available_funds;
         this->is_open = is_open;
+    }
+
+    friend ostream& operator<< (ostream& console, Bank_Account ba)
+    {
+        console << "Account Details:" << endl;
+        console << "\tID: " << ba.account_id << endl;
+        console << "\tOwner: " << ba.owner_id << endl;
+        console << "\tFunds:" << ba.available_funds << endl;
+        console << "\tStatus: " << (ba.is_open? "Open" : "Closed") << endl;
+        return (console);
     }
 };
