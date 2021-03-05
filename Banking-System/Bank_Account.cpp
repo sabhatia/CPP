@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 
 using namespace std;
@@ -28,5 +29,21 @@ public:
         console << "\tFunds:" << ba.available_funds << endl;
         console << "\tStatus: " << (ba.is_open? "Open" : "Closed") << endl;
         return (console);
+    }
+
+    friend ofstream& operator<< (ofstream& out_file, Bank_Account ba)
+    {
+        out_file << ba.account_id << endl << ba.owner_id << endl << ba.available_funds << endl;
+        out_file << ba.is_open << endl;
+        return (out_file);
+    }
+
+    friend ifstream& operator>> (ifstream& in_file, Bank_Account ba)
+    {
+        in_file >> ba.account_id; 
+        in_file >> ba.owner_id;
+        in_file >> ba.available_funds;
+        in_file >> ba.is_open;
+        return (in_file);   
     }
 };

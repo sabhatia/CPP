@@ -95,12 +95,15 @@ STL/Product.dSYM/Contents/Resources/DWARF/Product
 STL/Product_Vector_Test.dSYM/Contents/Info.plist
 STL/Product_Vector_Test.dSYM/Contents/Resources/DWARF/Product_Vector_Test
 STL/Product_Vector_Test
-Banking System/tasks.json
 Banking System/.vscode/tasks.json
-Banking-System/tasks.json
-Banking-System/.vscode/tasks.json
 Banking-System/.vscode/tasks
 Banking-System/.vscode/tasks.dSYM/Contents/Info.plist
 Banking-System/.vscode/tasks.dSYM/Contents/Resources/DWARF/tasks
 Banking-System/Bank_Account_Test.dSYM/Contents/Info.plist
 Banking-System/Bank_Account_Test.dSYM/Contents/Resources/DWARF/Bank_Account_Test
+Banking-System/accounts_data.txt
+Banking-System/Bank_Account
+Banking-System/Bank_Account_Test
+Banking-System/.vscode/settings.json
+Banking-System/Bank_Account.dSYM/Contents/Info.plist
+Banking-System/Bank_Account.dSYM/Contents/Resources/DWARF/Bank_Account
