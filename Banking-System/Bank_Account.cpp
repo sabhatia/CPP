@@ -1,3 +1,6 @@
+#ifndef BANK_ACCOUNT_CPP_
+#define BANK_ACCOUNT_CPP_
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -50,3 +53,5 @@ public:
         return (in_file);
     }
 };
+
+#endif /* BANK_ACCOUNT_CPP_ */

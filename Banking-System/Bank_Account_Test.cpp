@@ -1,6 +1,9 @@
+#ifndef BANK_ACCOUNT_TEST_CPP_
+#define BANK_ACCOUNT_TEST_CPP_
+
 #include "Bank_Account.cpp"
 
-int Bank_Account_Tests()
+void Bank_Account_Tests()
 {
     // TC(1): Create Bank Account class and print
     Bank_Account check1(1, 1, 1000.00, true);
@@ -45,3 +48,5 @@ int Bank_Account_Tests()
     cout << check3;
     cout << "TC(3): Passed" << endl;
 }
+
+#endif /* BANK_ACCOUNT_TEST_CPP_ */
