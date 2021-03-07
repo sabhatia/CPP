@@ -17,7 +17,6 @@ private:
     ofstream out_file;
     vector<Bank_Account> *accounts_vct; // make this shared ptr later
 public:
-
     static const u_int NOT_FOUND_ACCOUNT_ID = 0;
 
     Banking_DB(string data_source, vector<Bank_Account> *ba_vct)
@@ -75,7 +74,7 @@ public:
     Bank_Account find_account(u_int user_account_id)
     {
         vector<Bank_Account>::iterator itr;
-        Bank_Account dummy_ba(0,0,0,false);
+        Bank_Account dummy_ba(0, 0, 0, false);
 
         for (itr = this->accounts_vct->begin(); itr != this->accounts_vct->end(); itr++)
         {
@@ -92,20 +91,20 @@ public:
     Bank_Account create_new_account(u_int account_id, u_int owner_id, float starting_amt)
     {
         Bank_Account existing_account = find_account(account_id);
-        Bank_Account dummy_account(0,0,0, false);
+        Bank_Account dummy_account(0, 0, 0, false);
 
         // Check the account id doesn't already exist
         if (existing_account.get_account_id() != NOT_FOUND_ACCOUNT_ID)
         {
-            cout << "ERROR: Account " << account_id << " already exists. None create.\n";
+            cout << "ERROR: Account " << account_id << " already exists. None created.\n";
             return (existing_account);
         }
 
         // Fix to better validate
         if (starting_amt < Bank_Account::MINIMUM_BALANCE)
         {
-            cout << "ERROR: Minimum balance of " << Bank_Account::MINIMUM_BALANCE \
-            << " required when opening an account.\n";
+            cout << "ERROR: Minimum balance of " << Bank_Account::MINIMUM_BALANCE
+                 << " required when opening an account.\n";
             return (existing_account);
         }
 
@@ -118,7 +117,7 @@ public:
 
     float close_existing_account(u_int account_id)
     {
-        Bank_Account dummy_account(0,0,0,false);
+        Bank_Account dummy_account(0, 0, 0, false);
         Bank_Account existing_account;
         // Check if the account exists
         existing_account = find_account(account_id);
@@ -142,12 +141,30 @@ public:
 
     void list_open_accounts()
     {
-
+        vector<Bank_Account>::iterator open_itr;
+        for (open_itr = this->accounts_vct->begin();
+             open_itr != this->accounts_vct->end();
+             open_itr++)
+        {
+            if (open_itr->is_open_account())
+            {
+                cout << *open_itr;
+            }
+        }
     }
 
     void list_closed_accounts()
     {
-
+        vector<Bank_Account>::iterator close_itr;
+        for (close_itr = this->accounts_vct->begin();
+             close_itr != this->accounts_vct->end();
+             close_itr++)
+        {
+            if (!close_itr->is_open_account())
+            {
+                cout << *close_itr;
+            }
+        }        
     }
 
     friend ostream &operator<<(ostream &console, Banking_DB &db_info)
