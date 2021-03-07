@@ -50,6 +50,24 @@ int main()
     in_file >> check3;
     cout << check3;
     cout << "TC(3): Passed" << endl;
+
+    // TC(4): Deposit Tx
+    cout << "TC(4): Start" << endl;
+    Bank_Account test4_ba(4, 40, 4000.00, true);
+    float deposit_amt = 44.44;
+    cout << "Original Account:" << endl;
+    cout << test4_ba;
+    cout << "Depositing: " << deposit_amt << endl;
+    test4_ba.deposit_funds(deposit_amt);
+    cout << "Final Account: " << endl;
+    cout << test4_ba;
+    cout << "TC(4): Passed" << endl;
+
+    // TC(5): Withdraw Tx
+    cout << "TC(5): Start" << endl;
+    cout << "TC(5): Passed" << endl;
+
+
 }
 
 #endif /* BANK_ACCOUNT_TEST_CPP_ */

@@ -25,6 +25,28 @@ public:
         this->is_open = is_open;
     }
 
+    float deposit_funds(float additional_funds)
+    {
+        if (!is_open)
+        {
+            // Can't deposit in closed accounts
+            cout << "Account is closed. Deposit cancelled" << endl;
+        }
+
+        available_funds += additional_funds;
+        return (available_funds);
+    }
+
+    float withdraw_funds(float removed_funds)
+    {
+        if (available_funds > removed_funds)
+        {
+            available_funds -= removed_funds;
+        }
+
+        return (available_funds);
+    }
+
     friend ostream &operator<<(ostream &console, Bank_Account ba)
     {
         console << "Account Details:" << endl;
