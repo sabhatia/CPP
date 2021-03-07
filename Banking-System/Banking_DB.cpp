@@ -17,6 +17,9 @@ private:
     ofstream out_file;
     vector<Bank_Account> *accounts_vct; // make this shared ptr later
 public:
+
+    static const u_int NOT_FOUND_ACCOUNT_ID = 0;
+
     Banking_DB(string data_source, vector<Bank_Account> *ba_vct)
     {
         this->data_source_name = data_source;
@@ -67,6 +70,84 @@ public:
             out_file << *itr;
         }
         cout << "Flushed out " << this->accounts_vct->size() << " entries." << endl;
+    }
+
+    Bank_Account find_account(u_int user_account_id)
+    {
+        vector<Bank_Account>::iterator itr;
+        Bank_Account dummy_ba(0,0,0,false);
+
+        for (itr = this->accounts_vct->begin(); itr != this->accounts_vct->end(); itr++)
+        {
+            if (itr->get_account_id() == user_account_id)
+            {
+                return (*itr);
+            }
+        }
+
+        // didn't find any account. Return a dummy.
+        return (dummy_ba);
+    }
+
+    Bank_Account create_new_account(u_int account_id, u_int owner_id, float starting_amt)
+    {
+        Bank_Account existing_account = find_account(account_id);
+        Bank_Account dummy_account(0,0,0, false);
+
+        // Check the account id doesn't already exist
+        if (existing_account.get_account_id() != NOT_FOUND_ACCOUNT_ID)
+        {
+            cout << "ERROR: Account " << account_id << " already exists. None create.\n";
+            return (existing_account);
+        }
+
+        // Fix to better validate
+        if (starting_amt < Bank_Account::MINIMUM_BALANCE)
+        {
+            cout << "ERROR: Minimum balance of " << Bank_Account::MINIMUM_BALANCE \
+            << " required when opening an account.\n";
+            return (existing_account);
+        }
+
+        // Validations passed. Create the account
+        Bank_Account new_account(account_id, owner_id, starting_amt, true);
+        this->accounts_vct->push_back(new_account);
+        this->flush();
+        return (new_account);
+    }
+
+    float close_existing_account(u_int account_id)
+    {
+        Bank_Account dummy_account(0,0,0,false);
+        Bank_Account existing_account;
+        // Check if the account exists
+        existing_account = find_account(account_id);
+        if (existing_account.get_account_id() == NOT_FOUND_ACCOUNT_ID)
+        {
+            cout << "ERROR: Account[" << account_id << "] doesn't exist.\n";
+            return (0.0);
+        }
+
+        // Check that it is open
+        if (existing_account.is_open_account() != true)
+        {
+            cout << "ERROR: Account[" << account_id << "] already closed.\n";
+            return (0.0);
+        }
+
+        // Close the account. Withdraw funds to user
+        existing_account.close_account();
+        return (existing_account.withdraw_funds(existing_account.get_funds()));
+    }
+
+    void list_open_accounts()
+    {
+
+    }
+
+    void list_closed_accounts()
+    {
+
     }
 
     friend ostream &operator<<(ostream &console, Banking_DB &db_info)

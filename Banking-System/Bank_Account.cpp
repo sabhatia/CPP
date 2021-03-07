@@ -16,6 +16,9 @@ private:
     bool is_open;
 
 public:
+
+    static const u_int MINIMUM_BALANCE = 500.00;
+
     Bank_Account(u_int account_id = 0, u_int owner_id = 0,
                  float available_funds = 0.0, bool is_open = false)
     {
@@ -25,28 +28,66 @@ public:
         this->is_open = is_open;
     }
 
+    // Accessor methods
+    u_int get_account_id()
+    {
+        return this->account_id;
+    }
+
+    float get_funds()
+    {
+        return this->available_funds;
+    }
+
+    u_int get_owner_id()
+    {
+        return this->owner_id;
+    }
+
+    bool is_open_account()
+    {
+        return this->is_open;
+    }
+
+    void close_account()
+    {
+        this->is_open = false;
+    }
+
+    // Funds operations
     float deposit_funds(float additional_funds)
     {
         if (!is_open)
         {
             // Can't deposit in closed accounts
-            cout << "Account is closed. Deposit cancelled" << endl;
+            cout << "ERROR: Account is closed. Deposit cancelled" << endl;
+        } 
+        else{
+            available_funds += additional_funds;
         }
-
-        available_funds += additional_funds;
         return (available_funds);
     }
 
     float withdraw_funds(float removed_funds)
     {
-        if (available_funds > removed_funds)
+        float enforced_balance = MINIMUM_BALANCE;
+        if (!is_open)
         {
+            // Closed account. No minimum balance needed
+            enforced_balance = 0.0;
+        }
+        if (available_funds < removed_funds + enforced_balance)
+        {
+            cout << "ERROR: Not enough funds. Current balance: " << available_funds << ".\n";
+        } 
+        else
+        {        
             available_funds -= removed_funds;
         }
-
         return (available_funds);
     }
 
+    // IO Routines
     friend ostream &operator<<(ostream &console, Bank_Account ba)
     {
         console << "Account Details:" << endl;

@@ -38,7 +38,7 @@ int main()
     {
         if (!in_file.is_open())
         {
-            throw("TC(3): ERROR: Coult not open file " + acct_fname + "for reading.");
+            throw("TC(3): ERROR: Coult not open file " + acct_fname + " for reading.");
         }
     }
     catch (const std::exception &e)
@@ -65,6 +65,12 @@ int main()
 
     // TC(5): Withdraw Tx
     cout << "TC(5): Start" << endl;
+    cout << "Original Account:" << endl;
+    cout << test4_ba;
+    cout << "Withdrawing: " << deposit_amt << endl;
+    test4_ba.withdraw_funds(deposit_amt);
+    cout << "Final Account: " << endl;
+    cout << test4_ba;
     cout << "TC(5): Passed" << endl;
 
 
