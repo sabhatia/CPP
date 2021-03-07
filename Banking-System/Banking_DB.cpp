@@ -136,7 +136,10 @@ public:
 
         // Close the account. Withdraw funds to user
         existing_account.close_account();
-        return (existing_account.withdraw_funds(existing_account.get_funds()));
+        float remove_funds = existing_account.get_funds();
+        existing_account.withdraw_funds(remove_funds);
+        return (remove_funds);
+
     }
 
     void list_open_accounts()

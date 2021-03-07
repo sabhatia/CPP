@@ -49,13 +49,12 @@ int main()
     // Re-use test_db4 
     u_int user_account_id = 5;
     Bank_Account user_account = test_db4.find_account(user_account_id);
+    cout << user_account;
     if (user_account.get_account_id() == Banking_DB::NOT_FOUND_ACCOUNT_ID)
     {
-        cout << user_account;
         cout << "Test(5): Failed" << endl;
     }
     else{
-        cout << user_account;
         cout << "Test(5): Passed" << endl;
     }
     
@@ -63,9 +62,10 @@ int main()
     cout << "Test(6): Start" << endl;
     cout << "Test(6): Add duplicate account" << endl;
     float available_funds = test3_account.get_funds();
-    Bank_Account duplicate_account(5, 1000, 2000.00, true);
-    duplicate_account = test_db4.create_new_account(5, 1000, 2000.00);
-    if (duplicate_account.get_funds() != test3_account.get_funds()) 
+
+    Bank_Account duplicate_account = test_db4.create_new_account(5, 1000, 2000.00);
+    cout << duplicate_account;
+    if (duplicate_account.get_funds() != test3_account.get_funds())
     {
         cout << "Test(6): Failed" << endl;
     }
@@ -74,14 +74,39 @@ int main()
         cout << "Test(6): Passed" << endl;
     }
 
-    // TC(7): Find new account
+    // TC(7): Create account with less than minimum balance
     cout << "Test(7): Start" << endl;
-    cout << "Test(7): Find existing account" << endl;
-    cout << "Test(7): Passed" << endl;
+    cout << "Test(7): Create less than minimum balance" << endl;
+
+    Bank_Account min_account = test_db4.create_new_account(6, 1000, 400.00);
+    cout << min_account;
+    if (min_account.get_account_id() != Banking_DB::NOT_FOUND_ACCOUNT_ID)
+    {
+        cout << "Test(7): Failed" << endl;
+    }
+    else
+    {
+        cout << "Test(7): Passed" << endl;
+    }
 
     // TC(8): Close the new account
     cout << "Test(8): Start" << endl;
-    cout << "Test(8): Find existing account" << endl;
-    cout << "Test(8): Passed" << endl;
+    cout << "Test(8): Close account" << endl;
+    float account5_amt = test3_account.get_funds();
+    float closing_amt = test_db4.close_existing_account(5);
+    Bank_Account closed_acct = test_db4.find_account(5);
+
+    cout << closed_acct;
+    cout << "Account had " << closing_amt << " in final funds." << endl;
+
+    if (closing_amt != account5_amt) 
+    {
+        cout << "Expected:" << account5_amt << " Actual: " << closing_amt << endl;
+        cout << "Test(8): Failed" << endl;
+    }
+    else
+    {
+        cout << "Test(8): Passed" << endl;
+    }
 }
 #endif /* BANKING_DB_TEST_CPP_ */
