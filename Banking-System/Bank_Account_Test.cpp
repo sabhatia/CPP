@@ -3,14 +3,16 @@
 
 #include "Bank_Account.cpp"
 
-void Bank_Account_Tests()
+int main()
 {
     // TC(1): Create Bank Account class and print
+    cout << "TC(1): Start" << endl;
     Bank_Account check1(1, 1, 1000.00, true);
     cout << check1 << endl;
     cout << "TC(1): Passed" << endl;
 
     // TC(2): Write to file
+    cout << "TC(2): Start" << endl;
     string acct_fname = "accounts_data.txt";
     ofstream out_file(acct_fname);
     try
@@ -29,6 +31,7 @@ void Bank_Account_Tests()
     cout << "TC(2): Passed" << endl;
 
     // TC(3): Read from file
+    cout << "TC(3): Start" << endl;
     Bank_Account check3;
     ifstream in_file(acct_fname);
     try
