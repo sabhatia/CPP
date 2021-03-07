@@ -13,7 +13,7 @@ class Banking_DB
 {
 private:
     string data_source_name;
-    fstream data_file;
+    ifstream data_file;
     vector<Bank_Account> *accounts_vct; // make this shared ptr later
 public:
     Banking_DB(string data_source, vector<Bank_Account> *ba_vct)
@@ -21,6 +21,28 @@ public:
         this->data_source_name = data_source;
         assert(ba_vct != nullptr);
         this->accounts_vct = ba_vct; // validate for null pointer
+    }
+
+    void initialize()
+    {
+        cout << "Initializing DB..." << endl;
+        data_file.open(this->data_source_name);
+        if (!data_file.is_open())
+        {
+            throw ("Couldn't open file " + this->data_source_name + " for I/O");
+        }
+        assert(data_file.is_open());
+        Bank_Account tmp_acct;
+        while (true) {
+            data_file >> tmp_acct;
+            if (data_file.eof())
+            {
+                break;
+            }
+            accounts_vct->push_back(tmp_acct);
+
+        }
+        cout << "Loaded in " << this->accounts_vct->size() << " entires." << endl;
     }
 
     friend ostream &operator<<(ostream &console, Banking_DB &db_info)
