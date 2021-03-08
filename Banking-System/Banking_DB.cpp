@@ -16,6 +16,22 @@ private:
     ifstream in_file;
     ofstream out_file;
     vector<Bank_Account> *accounts_vct; // make this shared ptr later
+    Bank_Account* find_account_entry(u_int user_account_id)
+    {
+        vector<Bank_Account>::iterator act_itr;
+        for (act_itr = this->accounts_vct->begin();
+             act_itr != this->accounts_vct->end(); act_itr++)
+        {
+            if (act_itr->get_account_id() == user_account_id)
+            { 
+                return &(*act_itr);
+            }
+        }
+
+        // didn't find any account. Return a dummy.
+        return (nullptr);
+    }
+
 public:
     static const u_int NOT_FOUND_ACCOUNT_ID = 0;
 
@@ -63,7 +79,8 @@ public:
         assert(out_file.is_open());
 
         // Write to the file
-        for (vector<Bank_Account>::iterator itr = this->accounts_vct->begin();
+        vector<Bank_Account>::iterator itr;
+        for (itr = this->accounts_vct->begin();
              itr != this->accounts_vct->end(); itr++)
         {
             out_file << *itr;
@@ -89,10 +106,10 @@ public:
 
     Bank_Account create_new_account(u_int account_id, u_int owner_id, float starting_amt)
     {
-        Bank_Account existing_account = find_account(account_id);
         Bank_Account dummy_account(0, 0, 0, false);
 
         // Check the account id doesn't already exist
+        Bank_Account existing_account = find_account(account_id);
         if (existing_account.get_account_id() != NOT_FOUND_ACCOUNT_ID)
         {
             cout << "ERROR: Account " << account_id << " already exists. None created.\n";
@@ -117,29 +134,28 @@ public:
     float close_existing_account(u_int account_id)
     {
         Bank_Account dummy_account(0, 0, 0, false);
-        Bank_Account existing_account;
+        Bank_Account *existing_account;
         // Check if the account exists
-        existing_account = find_account(account_id);
-        if (existing_account.get_account_id() == NOT_FOUND_ACCOUNT_ID)
+        existing_account = find_account_entry(account_id);
+        if (existing_account->get_account_id() == NOT_FOUND_ACCOUNT_ID)
         {
             cout << "ERROR: Account[" << account_id << "] doesn't exist.\n";
             return (0.0);
         }
 
         // Check that it is open
-        if (existing_account.is_open_account() != true)
+        if (existing_account->is_open_account() != true)
         {
             cout << "ERROR: Account[" << account_id << "] already closed.\n";
             return (0.0);
         }
 
         // Close the account. Withdraw funds to user
-        existing_account.close_account();
-        float remove_funds = existing_account.get_funds();
-        existing_account.withdraw_funds(remove_funds);
+        existing_account->close_account();
+        float remove_funds = existing_account->get_funds();
+        existing_account->withdraw_funds(remove_funds);
         this->flush();
         return (remove_funds);
-
     }
 
     void list_open_accounts()

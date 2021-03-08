@@ -108,5 +108,11 @@ int main()
     {
         cout << "Test(8): Passed" << endl;
     }
+
+    // TC(9: All closed accounts
+    cout << "Test(9): Start\n";
+    cout << "Test(9): List Closed accounts\n";
+    test_db4.list_closed_accounts();
+    cout << "Test(9): Passed\n";
 }
 #endif /* BANKING_DB_TEST_CPP_ */
