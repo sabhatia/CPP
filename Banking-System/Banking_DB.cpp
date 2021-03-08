@@ -158,6 +158,46 @@ public:
         return (remove_funds);
     }
 
+    bool deposit_money_to_account(u_int account_id, float additional_funds)
+    {
+        Bank_Account *deposit_acct = find_account_entry(account_id);
+        if (deposit_acct == nullptr)
+        {
+            cout << "ERROR: Account[" << account_id << "] not found.\n";
+            return (false);
+        }
+
+        float existing_funds = deposit_acct->get_funds();
+        float account_funds = deposit_acct->deposit_funds(additional_funds);
+        if (account_funds != existing_funds + additional_funds)
+        {
+            cout << "ERROR: Account[" << account_id << "]: Could not deposit funds.\n";
+            return (false);
+        }
+        
+        return (true);
+    }
+
+    bool withdraw_money_from_account(u_int account_id, float withdraw_funds)
+    {
+        Bank_Account *withdraw_acct = find_account_entry(account_id);
+        if (withdraw_acct == nullptr)
+        {
+            cout << "ERROR: Account[" << account_id << "] not found.\n";
+            return (false);
+        }
+        
+        float existing_funds = withdraw_acct->get_funds();
+        float account_funds = withdraw_acct->withdraw_funds(withdraw_funds);
+        if (account_funds != existing_funds - withdraw_funds)
+        {
+            cout << "ERROR: Account[" << account_id << "]: Could not withdraw funds.\n";
+            return (false);
+        }
+        
+        return (true);
+    }
+
     void list_open_accounts()
     {
         vector<Bank_Account>::iterator open_itr;

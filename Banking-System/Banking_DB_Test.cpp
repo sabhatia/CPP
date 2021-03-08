@@ -89,10 +89,49 @@ int main()
         cout << "Test(7): Passed" << endl;
     }
 
+    // TC(10): Add funds to the account
+    cout << "TC(10): Start\n";
+    cout << "TC(10): Add funds to account\n";
+    bool tx_success = test_db4.deposit_money_to_account(5, 500.0);
+    cout << test_db4.find_account(5);
+    if (tx_success)
+    {
+        cout << "TC(10): Passed\n";
+    }
+    else{
+        cout << "TC(10): Failed\n";
+    }
+    
+    // TC(11): Withdraw funds from account
+    cout << "TC(11): Start\n";
+    cout << "TC(11): Remove funds from account\n";
+    tx_success = test_db4.withdraw_money_from_account(5, 567.0);
+    cout << test_db4.find_account(5);
+    if (tx_success)
+    {
+        cout << "TC(11): Passed\n";
+    }
+    else{
+        cout << "TC(11): Failed\n";
+    }
+
+    // TC(12): Lower funds to less that 500
+    cout << "TC(12): Start\n";
+    cout << "TC(12): Remove funds from account\n";
+    tx_success = test_db4.withdraw_money_from_account(5, 200.0); // expected to fail
+    cout << test_db4.find_account(5);
+    if (!tx_success)
+    {
+        cout << "TC(12): Passed\n";
+    }
+    else{
+        cout << "TC(12): Failed\n";
+    }
+    
     // TC(8): Close the new account
     cout << "Test(8): Start" << endl;
     cout << "Test(8): Close account" << endl;
-    float account5_amt = test3_account.get_funds();
+    float account5_amt = (test_db4.find_account(5)).get_funds();
     float closing_amt = test_db4.close_existing_account(5);
     Bank_Account closed_acct = test_db4.find_account(5);
 
