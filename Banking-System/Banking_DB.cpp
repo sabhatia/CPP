@@ -73,19 +73,18 @@ public:
 
     Bank_Account find_account(u_int user_account_id)
     {
-        vector<Bank_Account>::iterator itr;
-        Bank_Account dummy_ba(0, 0, 0, false);
+        Bank_Account dummy_act(0,0,0,false);
 
-        for (itr = this->accounts_vct->begin(); itr != this->accounts_vct->end(); itr++)
+        for (auto user_account : *this->accounts_vct)
         {
-            if (itr->get_account_id() == user_account_id)
-            {
-                return (*itr);
+            if (user_account.get_account_id() == user_account_id)
+            { 
+                return (user_account);
             }
         }
 
         // didn't find any account. Return a dummy.
-        return (dummy_ba);
+        return (dummy_act);
     }
 
     Bank_Account create_new_account(u_int account_id, u_int owner_id, float starting_amt)
@@ -138,6 +137,7 @@ public:
         existing_account.close_account();
         float remove_funds = existing_account.get_funds();
         existing_account.withdraw_funds(remove_funds);
+        this->flush();
         return (remove_funds);
 
     }
