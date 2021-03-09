@@ -90,8 +90,7 @@ public:
     // IO Routines
     friend ostream &operator<<(ostream &console, Bank_Account ba)
     {
-        console << "Account Details:" << endl;
-        console << "\tID: " << ba.account_id << endl;
+        console << "Account [" << ba.account_id << "]: " << endl;
         console << "\tOwner: " << ba.owner_id << endl;
         console << "\tFunds:" << ba.available_funds << endl;
         console << "\tStatus: " << (ba.is_open ? "Open" : "Closed") << endl;

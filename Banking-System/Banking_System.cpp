@@ -43,7 +43,7 @@ public:
 
     static BANKING_OPTIONS get_banking_option()
     {
-        u_int selected_banking_option;
+        u_int selected_banking_option = SB_OPTION_NONE;
         cout << "Your selection: ";
         cin >> selected_banking_option;
         return ((BANKING_OPTIONS)selected_banking_option);
@@ -55,6 +55,11 @@ public:
         this->bank_name = bank_name;
         //this->bank_db(db_path, &this->accounts_vct);
         this->bank_db.initialize(); 
+    }
+
+    ~Banking_System()
+    {
+        this->bank_db.flush();
     }
 
     string get_name()
@@ -74,6 +79,15 @@ public:
                 break;
             case SB_OPTION_SHOW_ACCOUNTS:
                 process_list_accounts();
+                break;
+            case SB_OPTION_SHOW_BALANCE:
+                proces_show_balance();
+                break;
+            case SB_OPTION_DEPOSIT_FUNDS:
+                process_deposit_funds();
+                break;
+            case SB_OPTION_WITHDRAW_FUNDS:
+                process_withdraw_funds();
                 break;
             default:
                 cout << "ERROR: Unknown selection[" << banking_option << "]\n";
@@ -111,6 +125,43 @@ public:
         this->bank_db.list_closed_accounts();
     }
 
+    void proces_show_balance()
+    {
+        u_int account_id;
+        cout << "Balance Enquiry:\n\tAccount ID: ";
+        cin >> account_id;
+
+        Bank_Account query_account = this->bank_db.find_account(account_id);
+        if (query_account.get_account_id() == Banking_DB::NOT_FOUND_ACCOUNT_ID)
+        {
+            cout << "ERROR: No account with ID: " << account_id << endl;
+            return;
+        }
+        
+        cout << "\tAccount [" << account_id << "] Balance: " << query_account.get_funds() << endl;
+    }
+
+    void process_deposit_funds()
+    {
+        u_int account_id = 0;
+        float deposit_amt = 0.0;
+
+        cout << "Deposit Funds:\n\tAccount ID: "; cin >> account_id;
+        cout << "\tDeposit Amt: "; cin >> deposit_amt;
+
+        this->bank_db.deposit_money_to_account(account_id, deposit_amt);
+    }
+    
+    void process_withdraw_funds()
+    {
+        u_int account_id = 0;
+        float withdraw_amt = 0.0;
+
+        cout << "Withdraw Funds:\n\tAccount ID: "; cin >> account_id;
+        cout << "\tDeposit Amt: "; cin >> withdraw_amt;
+
+        this->bank_db.withdraw_money_from_account(account_id, withdraw_amt);
+    }
 };
 
 #endif /* BANKING_SYSTEM_CPP_ */

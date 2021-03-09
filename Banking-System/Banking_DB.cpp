@@ -70,7 +70,7 @@ public:
     // Write the contents to the db destination
     void flush()
     {
-        cout << "Flushing to DB..." << endl;
+        //cout << "Flushing to DB..." << endl;
         out_file.open(this->data_source_name);
         if (!out_file.is_open())
         {
@@ -85,7 +85,7 @@ public:
         {
             out_file << *itr;
         }
-        cout << "Flushed out " << this->accounts_vct->size() << " entries." << endl;
+        //cout << "Flushed out " << this->accounts_vct->size() << " entries." << endl;
     }
 
     Bank_Account find_account(u_int user_account_id)
@@ -175,6 +175,7 @@ public:
             return (false);
         }
         
+        this->flush();
         return (true);
     }
 
@@ -195,6 +196,7 @@ public:
             return (false);
         }
         
+        this->flush();
         return (true);
     }
 
