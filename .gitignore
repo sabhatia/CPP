@@ -1,4 +1,3 @@
-
 /All_Factors
 /All_Factors.dSYM
 /Area_Circle
@@ -140,7 +139,9 @@ Banking-System-II/Banking_DB
 Banking-System-II/Banking_DB_Test
 Banking-System-II/accounts_data.txt
 Banking-System-II/Bank_Account_Test
+Banking-System-II/build
 CMakeTestProject
 .vscode/launch.json
 .vscode/settings.json
 .vscode/tasks.json
+Banking-System-II/.vscode/launch.json

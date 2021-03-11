@@ -5,7 +5,7 @@ int main()
     BANKING_OPTIONS banking_option = SB_OPTION_NONE;
 
     // Initialize the Banking system
-    Banking_System sandeep_bank("Sandeep Bank", "./Test-DB/sandeep-bank.txt");
+    Banking_System sandeep_bank("Sandeep Bank", "/Users/sabhatia/Development/C++/Banking-System-II/Test-DB/sandeep-bank.txt");
     // Print the starting banner and options
     while (true)
     {
