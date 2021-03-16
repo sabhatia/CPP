@@ -8,8 +8,6 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-add_executable(Banking_DB_Test Banking_DB_Test.cpp)
-
 add_executable(GT_Bank_Account GT_Bank_Account.cpp)
 target_link_libraries(GT_Bank_Account PUBLIC
     gtest_main
