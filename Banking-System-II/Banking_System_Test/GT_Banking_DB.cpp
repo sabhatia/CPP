@@ -116,16 +116,31 @@ TEST_F(GTBankingAccounts, DBAccountBalanceMin)
     
     EXPECT_EQ(0, ba_fail.get_account_id());
     EXPECT_EQ(orig_accts, ba_vct3.size());
-
 }
 
-TEST(GTBankingDB, DBAccountBalanceAdd)
+TEST_F(GTBankingAccounts, DBAccountBalanceAdd)
 {
-    EXPECT_TRUE(false);
+    float deposit_amt = 350123.34;
+    Bank_Account ba_add = bdb3->create_new_account(ba_new.acct_id, ba_new.owner_id, ba_new.amt);
+    
+    EXPECT_EQ(ba_new.acct_id, ba_add.get_account_id());
+    bdb3->deposit_money_to_account(ba_new.acct_id, deposit_amt);
+
+    ba_add = bdb3->find_account(ba_new.acct_id);
+
+    EXPECT_EQ(ba_new.amt + deposit_amt, ba_add.get_funds());
 }
 
-TEST(GTBankingDB, DBAccountBalanceRemove)
+TEST_F(GTBankingAccounts, DBAccountBalanceRemove)
 {
-    EXPECT_TRUE(false);
+    float withdraw_amt = 60.89;
+    Bank_Account ba_add = bdb3->create_new_account(ba_new.acct_id, ba_new.owner_id, ba_new.amt);
+    
+    EXPECT_EQ(ba_new.acct_id, ba_add.get_account_id());
+    bdb3->withdraw_money_from_account(ba_new.acct_id, withdraw_amt);
+
+    ba_add = bdb3->find_account(ba_new.acct_id);
+
+    EXPECT_EQ(ba_new.amt - withdraw_amt, ba_add.get_funds());
 }
 
