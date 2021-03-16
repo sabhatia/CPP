@@ -108,9 +108,15 @@ TEST_F(GTBankingAccounts, DBAccountClose)
     EXPECT_EQ(false, ba_close.is_open_account());
 }
 
-TEST(GTBankingDB, DBAccountBalanceMin)
+TEST_F(GTBankingAccounts, DBAccountBalanceMin)
 {
-    EXPECT_TRUE(false);
+    int orig_accts = ba_vct3.size();
+    ba_new.amt = Bank_Account::MINIMUM_BALANCE - 100;
+    Bank_Account ba_fail = bdb3->create_new_account(ba_new.acct_id, ba_new.owner_id, ba_new.amt);
+    
+    EXPECT_EQ(0, ba_fail.get_account_id());
+    EXPECT_EQ(orig_accts, ba_vct3.size());
+
 }
 
 TEST(GTBankingDB, DBAccountBalanceAdd)
