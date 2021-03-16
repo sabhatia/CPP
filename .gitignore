@@ -141,3 +141,4 @@ CMakeTestProject
 .vscode/settings.json
 .vscode/tasks.json
 Banking-System-II/.vscode/launch.json
+Banking-System-II/.vscode/c_cpp_properties.json

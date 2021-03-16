@@ -10,3 +10,14 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_executable(Bank_Account_Test Bank_Account_Test.cpp)
 add_executable(Banking_DB_Test Banking_DB_Test.cpp)
+
+add_executable(GT_Bank_Account GT_Bank_Account.cpp)
+target_link_libraries(GT_Bank_Account PUBLIC
+    gtest_main
+    Bank_Account)
+    
+add_test(
+    NAME GT_Bank_Account
+    COMMAND GT_Bank_Account
+)
+

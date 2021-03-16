@@ -10,6 +10,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_subdirectory(Banking_DB)
 add_subdirectory(Banking_System_Test)
+add_subdirectory(googletest)
 
 
 add_executable(${This} Banking_System_UI.cpp)
