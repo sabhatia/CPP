@@ -20,3 +20,12 @@ add_test(
     COMMAND GT_Bank_Account
 )
 
+add_executable(GT_Banking_DB GT_Banking_DB.cpp)
+target_link_libraries(GT_Banking_DB PUBLIC
+    gtest_main
+    Banking_DB)
+    
+add_test(
+    NAME GT_Banking_DB
+    COMMAND GT_Banking_DB
+)
