@@ -88,7 +88,13 @@ TEST_F(GTBankingAccounts, DBAccountAddFind)
 
 TEST_F(GTBankingAccounts, DBAccountDuplicate)
 {
-    EXPECT_TRUE(false);
+    int orig_accts = ba_vct3.size();
+    bdb3->create_new_account(ba_new.acct_id, ba_new.owner_id, ba_new.amt);
+    EXPECT_EQ(orig_accts + 1, ba_vct3.size());
+
+    // Try adding the same account
+    bdb3->create_new_account(ba_new.acct_id, ba_new.owner_id, ba_new.amt);
+    EXPECT_EQ(orig_accts + 1, ba_vct3.size());
 }
 
 TEST(GTBankingDB, DBAccountClose)
