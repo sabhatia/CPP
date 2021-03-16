@@ -97,9 +97,15 @@ TEST_F(GTBankingAccounts, DBAccountDuplicate)
     EXPECT_EQ(orig_accts + 1, ba_vct3.size());
 }
 
-TEST(GTBankingDB, DBAccountClose)
+TEST_F(GTBankingAccounts, DBAccountClose)
 {
-    EXPECT_TRUE(false);
+    int orig_accts = ba_vct3.size();
+    bdb3->create_new_account(ba_new.acct_id, ba_new.owner_id, ba_new.amt);
+    EXPECT_EQ(orig_accts + 1, ba_vct3.size());
+
+    bdb3->close_existing_account(ba_new.acct_id);
+    Bank_Account ba_close = bdb3->find_account(ba_new.acct_id);
+    EXPECT_EQ(false, ba_close.is_open_account());
 }
 
 TEST(GTBankingDB, DBAccountBalanceMin)
