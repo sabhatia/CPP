@@ -18,7 +18,7 @@ TEST(GTBankingDB, DBInitEmpty)
     EXPECT_EQ(1, ba_vct1.size());
 }
 
-TEST(GTBankingDB, DBInitAccounts)
+TEST(GTBankingDB, DBInitNotEmpty)
 {
     string accounts_file = "/Users/sabhatia/Development/C++/Banking-System-II/Test-DB/test-accounts-file.txt";
     struct ba_data
@@ -46,3 +46,68 @@ TEST(GTBankingDB, DBInitAccounts)
     EXPECT_EQ(ba_accts2_data[1].id, ba2_cpy.get_account_id());
     EXPECT_EQ(ba_accts2_data[1].amt, ba2_cpy.get_funds());
 }
+
+class GTBankingAccounts:public::testing::Test
+{
+protected:
+    string tmp_filename = "/tmp/test-accounts-write-file.txt";
+    vector<Bank_Account> ba_vct3;
+    Banking_DB *bdb3;
+
+    struct BA_details
+    {
+        int acct_id;
+        int owner_id;
+        float amt;
+    };
+
+    BA_details ba_new = {5, 50, 567.89};
+
+    virtual void SetUp() override 
+    {
+        bdb3 = new Banking_DB(tmp_filename, &ba_vct3);
+    }
+
+    virtual void TearDown() override
+    {
+        delete bdb3;
+    }
+};
+
+TEST_F(GTBankingAccounts, DBAccountAddFind)
+{
+
+    int orig_accts = ba_vct3.size();
+    bdb3->create_new_account(ba_new.acct_id, ba_new.owner_id, ba_new.amt);
+    EXPECT_EQ(orig_accts + 1, ba_vct3.size());
+
+    Bank_Account ba_add = bdb3->find_account(ba_new.acct_id);
+    EXPECT_EQ(ba_new.acct_id, ba_add.get_account_id());
+    EXPECT_EQ(ba_new.amt, ba_add.get_funds());
+}
+
+TEST_F(GTBankingAccounts, DBAccountDuplicate)
+{
+    EXPECT_TRUE(false);
+}
+
+TEST(GTBankingDB, DBAccountClose)
+{
+    EXPECT_TRUE(false);
+}
+
+TEST(GTBankingDB, DBAccountBalanceMin)
+{
+    EXPECT_TRUE(false);
+}
+
+TEST(GTBankingDB, DBAccountBalanceAdd)
+{
+    EXPECT_TRUE(false);
+}
+
+TEST(GTBankingDB, DBAccountBalanceRemove)
+{
+    EXPECT_TRUE(false);
+}
+
